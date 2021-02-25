@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 
@@ -7,7 +8,6 @@ use app\interfaces\IModels;
 
 abstract class Model implements IModels
 {
-    protected $db;
 
     public function __set($name, $value)
     {
@@ -16,25 +16,31 @@ abstract class Model implements IModels
 
     public function __get($name)
     {
-       return $this->$name;
+        return $this->$name;
     }
-
-    public function __construct(Db $db)
+    //CRUD
+        //READ One
+    public function getOne($id)
     {
-        $this->db = $db;
-    }
-
-
-    public function getOne($id) {
         $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE id = {$id}";
-        return $this->db->queryOne($sql);
+        $sql = "SELECT * FROM {$tableName} WHERE id = :id";
+//        return Db::getInstance()->queryOne($sql, ['id' => $id]);
+        return Db::getInstance()->queryOneObject($sql, ['id' => $id], static::class);
     }
-
-    public function getAll() {
+        //READ All
+    public function getAll()
+    {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryAll($sql);
+        return Db::getInstance()->queryAll($sql);
+    }
+
+
+    public function delete() {
+        $tableName = $this->getTableName();
+        $sql = "DELETE * FROM {$tableName} WHERE id = :id";
+
+        return Db::getInstance()->execute($sql, ['id' => $this->id]);
     }
 
     abstract public function getTableName();

@@ -6,8 +6,7 @@ class Autoload
 {
     public function loadClass($className)
     {
-        $fileName = str_replace(['app', '\\'], ['..', '/'], $className) . '.php';
-        var_dump($fileName);
+        $fileName = str_replace(['app', '\\'], [ROOT_DIR, DS], $className) . '.php';
         if (file_exists($fileName)) {
             include_once $fileName;
         }

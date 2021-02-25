@@ -4,13 +4,48 @@ include_once dirname($_SERVER['DOCUMENT_ROOT']) . "/config/config.php";
 
 use app\models\Product;
 use app\engine\Db;
+use app\models\User;
+
 spl_autoload_register([new \app\engine\Autoload(), 'loadClass']);
 
-
 //CREATE
-$product = new Product(new Db());
-//$product->insert();
+$user = new User();
+$user = $user->getOne(2);
+var_dump($user->delete());
 
+
+
+
+
+
+exit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //READ
 $product = new Product(new Db());
 $product->getOne(5);
@@ -25,3 +60,4 @@ $product->getOne(5);
 $product = new Product(new Db());
 $product->getOne(5);
 //$product->update();
+*/
