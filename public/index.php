@@ -5,59 +5,38 @@ include_once dirname($_SERVER['DOCUMENT_ROOT']) . "/config/config.php";
 use app\models\Product;
 use app\engine\Db;
 use app\models\User;
+use \app\models\Order;
 
 spl_autoload_register([new \app\engine\Autoload(), 'loadClass']);
 
 //CREATE
-$user = new User();
-$user = $user->getOne(2);
-var_dump($user->delete());
 
 
+$user = new User('user', '123');
+$user->insert();
 
 
-
-
-exit();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 //READ
-$product = new Product(new Db());
-$product->getOne(5);
-$product->getAll();
+
+$user = User::getOne(1);
+var_dump($user);
+
+$users = User::getAll();
+var_dump($users);
 
 //DELETE
-$product = new Product(new Db());
-$product->getOne(5);
-//$product->delete();
+/**
+ * @var User $user
+ */
+$user = User::getOne(15);
+$user->delete();
 
-//UPDATE
-$product = new Product(new Db());
-$product->getOne(5);
-//$product->update();
-*/
+
+
+
+
+
+
+
+
+

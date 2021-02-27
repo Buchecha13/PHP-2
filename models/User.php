@@ -7,17 +7,15 @@ class User extends Model
     public $id;
     public $login;
     public $pass;
-    public $hash;
 
-    public function __construct($login = null, $pass = null, $hash = null)
+    public function __construct($login = null, $pass = null)
     {
         $this->login = $login;
         $this->pass = $pass;
-        $this->hash = $hash;
     }
 
 
-    public function getTableName() {
+    public static function getTableName() {
         return 'users';
     }
 

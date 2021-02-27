@@ -6,10 +6,10 @@ class Product extends Model
 {
     public $id;
     public $name;
-    public $description;
     public $price;
+    public $description;
 
-    public function __construct($name = null, $description = null, $price = null)
+    public function __construct($name = null, $price = null, $description = null)
     {
         $this->name = $name;
         $this->description = $description;
@@ -17,8 +17,8 @@ class Product extends Model
     }
 
 
-    public function getTableName()
+    public static function getTableName()
     {
-        return 'product';
+        return 'products';
     }
 }

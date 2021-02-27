@@ -31,6 +31,10 @@ class Db {
         return $this->connection;
     }
 
+    public function lastInsertId() {
+        return $this->connection->lastInsertId();
+    }
+
     private function prepareDsnString() {
         return sprintf(
             "%s:host=%s;dbname=%s;charset=%s",
@@ -41,7 +45,7 @@ class Db {
         );
     }
 
-    private function query($sql, $params)
+    private function query($sql, $params = [])
     {
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute($params);
@@ -54,6 +58,14 @@ class Db {
         $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
 
         return $stmt->fetch();
+    }
+
+    public function queryAllObjects($sql, $class)
+    {
+        $stmt = $this->query($sql);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
+
+        return $stmt->fetchAll();
     }
 
 
