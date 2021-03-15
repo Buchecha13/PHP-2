@@ -1,0 +1,14 @@
+{% block menu %}
+
+        <ul class="menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog">Каталог</a></li>
+            <li><a href="/cart">Корзина [<span id="cartCount">{{ cartCount }}</span>] </a></li>
+
+            {% if isAuth %}
+                <li><a href="/#">Админка</a></li>
+                <li><a href="/order">Заказы</a></li>
+            {% endif %}
+        </ul>
+
+{% endblock %}

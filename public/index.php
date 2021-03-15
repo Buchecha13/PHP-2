@@ -1,42 +1,24 @@
 <?php
+session_start();
+
+use app\engine\Request;
 
 include_once dirname($_SERVER['DOCUMENT_ROOT']) . "/config/config.php";
 
-use app\models\Product;
-use app\engine\Db;
-use app\models\User;
-use \app\models\Order;
 
-spl_autoload_register([new \app\engine\Autoload(), 'loadClass']);
+try {
+    spl_autoload_register([new \app\engine\Autoload(), 'loadClass']);
 
-//CREATE
+    $request = new Request();
 
+    $controllerName = $request->getControllerName() ?: 'index';
+    $actionName = $request->getActionName();
 
-$user = new User('user', '123');
-$user->insert();
-
-
-//READ
-
-$user = User::getOne(1);
-var_dump($user);
-
-$users = User::getAll();
-var_dump($users);
-
-//DELETE
-/**
- * @var User $user
- */
-$user = User::getOne(15);
-$user->delete();
-
-
-
-
-
-
-
-
-
-
+    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+    if (class_exists($controllerClass)) {
+        $controller = new $controllerClass();
+        $controller->runAction($actionName);
+    }
+} catch (Exception $exception ) {
+    var_dump($exception->getMessage());
+}

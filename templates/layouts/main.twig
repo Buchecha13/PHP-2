@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div class="container">
+    {% block auth %}
+        {{ include('auth.twig') }}
+    {% endblock %}
+
+    {% block menu %}
+        {{ include('menu.twig') }}
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script src="/main.js" type="text/javascript"></script>
+</body>
+</html>

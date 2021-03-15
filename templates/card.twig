@@ -1,0 +1,12 @@
+{% extends "layouts/main.twig" %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+
+    <div class="product">
+        <img  src="/product_images/{{ product.img }}" alt="">
+        <p>Описание: {{ product.description }}</p>
+        <p>Цена: <span>{{ product.price }}</span></p>
+        <button data-id="{{ product.id }}" class="buy-btn">Купить</button>
+    </div>
+{% endblock %}

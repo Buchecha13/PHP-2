@@ -1,0 +1,19 @@
+{% extends "layouts/main.twig" %}
+
+{% block content %}
+    <table class="orders" border="1">
+        <tr>
+            <td><b>Номер заказа</b></td>
+            <td><b>Имя клиента</b></td>
+            <td><b>Телефон клиента</b></td>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.clientName }}</td>
+                <td>{{ order.clientPhone }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

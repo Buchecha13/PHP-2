@@ -1,0 +1,18 @@
+{% if isAuth == true %}
+    <div class="user-info">
+        <p>Имя пользователя: <span>{{ name }} | </span> <a class="logout-btn" href="auth/logout">Выйти</a></p>
+    </div>
+{% else %}
+    <form class="auth-form" method="post" action="auth/login">
+        <input hidden name="auth-form">
+        <input type="text" name="login" placeholder="Введите логин">
+        <input type="password" name="pass" placeholder="Введите пароль">
+        <div class="save">
+            <label for="save-user">Запомнить:</label>
+            <input id="save-user" class="save-checkbox" type="checkbox" name="save">
+        </div>
+        <button class="login-btn" type="submit">Войти</button>
+    </form>
+
+    <span>{{ authError }}</span>
+{% endif %}

@@ -1,0 +1,28 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+
+    <h1 id="title">Корзина</h1>
+
+    {% if cart is empty %}
+        <p id="cartStatus">Корзина пуста</p>
+    {% else %}
+        <div class="products">
+            {% for product in cart %}
+                <div class="product-item" id="{{ product.cart_id }}">
+                    <h3>{{ product.product_name }}</h3>
+                    <img height="100px" src="/product_images/{{ product.product_img }}"
+                         alt="{{ product.product_name }}">
+                    <p>Цена: <span>{{ product.product_price }}</span></p>
+                    <button data-id="{{ product.cart_id }}" class="remove-btn">Убрать из корзины</button>
+
+                    {# <form action="cart/delete" method="post"> #}
+                    {# <input type="text" name="id" value="{{ product.cart_id }}" hidden> #}
+                    {# <button type="submit">Убрать из корзины</button> #}
+                    {# </form> #}
+
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
