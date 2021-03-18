@@ -10,7 +10,7 @@ class TwigRender
 
     public  function render($template, $params)
     {
-        $loader = new \Twig\Loader\FilesystemLoader(ROOT_DIR . '/templates');
+        $loader = new \Twig\Loader\FilesystemLoader(App::call()->config['ROOT_DIR'] . '/templates');
 
         $twig = new \Twig\Environment($loader, [
             'debug' => true,

@@ -3,15 +3,13 @@
 
 namespace app\controllers;
 
-use app\engine\TwigRender;
-
-use app\models\repositories\UserRepository;
+use app\engine\App;
 
 abstract class Controller
 {
     private $action;
     private $defaultAction = 'index';
-    private $renderer;
+
 
 
     public function runAction($action = null)
@@ -26,11 +24,9 @@ abstract class Controller
 
     public function render($template, $params = [])
     {
-        $this->renderer = new TwigRender();
+        $params['isAuth'] = App::call()->userRepository->isAuth();
+        $params['name'] = App::call()->userRepository->getUserName();
 
-        $params['isAuth'] = (new UserRepository())->isAuth();
-        $params['name'] = (new UserRepository())->getUserName();
-
-        return $this->renderer->render($template . '.twig', $params);
+        return App::call()->twigRender->render($template . '.twig', $params);
     }
 }

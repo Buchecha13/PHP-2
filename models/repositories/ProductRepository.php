@@ -10,7 +10,7 @@ use app\models\Repository;
 class ProductRepository extends Repository
 {
 
-    public function getTableName()
+    protected function getTableName()
     {
         return 'products';
     }

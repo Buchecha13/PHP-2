@@ -7,7 +7,7 @@
     {% if cart is empty %}
         <p id="cartStatus">Корзина пуста</p>
     {% else %}
-        <div class="products">
+        <div id="cart-products" class="products">
             {% for product in cart %}
                 <div class="product-item" id="{{ product.cart_id }}">
                     <h3>{{ product.product_name }}</h3>
@@ -15,14 +15,15 @@
                          alt="{{ product.product_name }}">
                     <p>Цена: <span>{{ product.product_price }}</span></p>
                     <button data-id="{{ product.cart_id }}" class="remove-btn">Убрать из корзины</button>
-
-                    {# <form action="cart/delete" method="post"> #}
-                    {# <input type="text" name="id" value="{{ product.cart_id }}" hidden> #}
-                    {# <button type="submit">Убрать из корзины</button> #}
-                    {# </form> #}
-
                 </div>
             {% endfor %}
         </div>
+        <forms id="order-form">
+            <input id="order-name" type="text" name="name" placeholder="Ваше Имя">
+            <input id="order-phone" type="tel" name="phone" placeholder="Ваш телефон">
+            <button id="create-order" class="order-btn">Оформить заказ</button>
+        </forms>
+
+
     {% endif %}
 {% endblock %}

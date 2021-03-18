@@ -1,0 +1,33 @@
+{% extends "layouts/main.twig" %}
+
+{% block content %}
+    <div class="order">
+        <h1>Номер заказа: <span id="order-id">{{ order.id }}</span></h1>
+        <h3>Заказчик:<span>{{ order.clientName }}</span></h3>
+        <h3>Телефон заказчика:<span>{{ order.clientPhone }}</span></h3>
+        <h3>Дата заказа:<span>{{ order.order_date }}</span></h3>
+    </div>
+    <table class="order-products">
+        <tr>
+            <th>Название товара</th>
+            <th>Цена (руб)</th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Статус заказа: <span id="order-status">{{ status }}</span></h3>
+
+
+    <select id="order-status-select">
+        <option value="canceled">Отменен</option>
+        <option value="processed">В обработке</option>
+        <option value="done">Выполнен</option>
+    </select>
+    <button id="order-status-btn">Изменить статус</button>
+
+{% endblock %}

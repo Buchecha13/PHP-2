@@ -4,6 +4,7 @@
 namespace app\models\repositories;
 
 
+use app\engine\App;
 use app\engine\Session;
 use app\models\entities\User;
 use app\models\Repository;
@@ -23,13 +24,10 @@ class UserRepository extends Repository
 
     public function auth($login, $pass)
     {
-        $user = $this->getWhere('login', $login);
+        $user = App::call()->userRepository->getWhere('login', $login);
         if (password_verify($pass, $user->pass)) {
-//            $_SESSION['auth']['login'] = $login;
-//            $_SESSION['auth']['id'] = $user->id;
-            (new Session())->setAuth('login', $login);
-            (new Session())->setAuth('id', $user->id);
-
+            App::call()->session->setAuth('login', $login);
+            App::call()->session->setAuth('id', $user->id);
             return true;
         } else {
             return false;
@@ -39,7 +37,7 @@ class UserRepository extends Repository
 
     public function getUserName()
     {
-        $user = (new Session())->getAuth('login');
+        $user = App::call()->session->getAuth('login');
 
         if (isset($user)) {
             return $user;
@@ -57,12 +55,12 @@ class UserRepository extends Repository
             if ($this->getWhere('hash', $hash)) {
                 $user = $this->getWhere('hash', $hash);
 
-                (new Session())->setAuth('login', $user->login);
+                App::call()->session->setAuth('login', $user->login);
 
-                $authUser = (new Session())->getAuth('login');
+                $authUser = App::call()->session->getAuth('login');
             }
         } else {
-            $authUser = (new Session())->getAuth('login');
+            $authUser = App::call()->session->getAuth('login');
         }
 
         return isset($authUser);

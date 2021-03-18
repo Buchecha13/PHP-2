@@ -3,13 +3,13 @@
 
 namespace app\controllers;
 
-use app\models\repositories\ProductRepository;
+use app\engine\App;
 
 class CatalogController extends Controller
 {
     public function actionIndex() {
 
-        $products = (new ProductRepository())->getAll();
+        $products = App::call()->productRepository->getAll();
 
         echo $this->render('catalog', [
             'products' => $products
@@ -18,7 +18,7 @@ class CatalogController extends Controller
 
     public function actionCard() {
         $id = (int)$_GET['id'];
-        $product = (new ProductRepository())->getOne($id);
+        $product = App::call()->productRepository->getOne($id);
 
         echo $this->render('card', [
             'product' => $product

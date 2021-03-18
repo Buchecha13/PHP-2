@@ -1,24 +1,18 @@
 <?php
 session_start();
 
-use app\engine\Request;
+use app\engine\App;
 
-include_once dirname($_SERVER['DOCUMENT_ROOT']) . "/config/config.php";
+include_once '../vendor/autoload.php';
 
+$config = include '../config/config.php';
 
 try {
-    spl_autoload_register([new \app\engine\Autoload(), 'loadClass']);
 
-    $request = new Request();
+    App::call()->run($config);
 
-    $controllerName = $request->getControllerName() ?: 'index';
-    $actionName = $request->getActionName();
+} catch (Exception $exception) {
 
-    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-    if (class_exists($controllerClass)) {
-        $controller = new $controllerClass();
-        $controller->runAction($actionName);
-    }
-} catch (Exception $exception ) {
     var_dump($exception->getMessage());
+
 }

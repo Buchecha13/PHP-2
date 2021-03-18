@@ -4,27 +4,23 @@
 namespace app\controllers;
 
 
-use app\engine\Request;
-use app\models\repositories\UserRepository;
+use app\engine\App;
 
 
 class AuthController extends Controller
 {
-    private $authStatus;
-
     public function actionLogin()
     {
-        $login = (new Request())->getParams()['login'];
-        $pass = (new Request())->getParams()['pass'];
-        $saveUser = (new Request())->getParams()['save'];
-
-        if ((new UserRepository())->auth($login, $pass)) {
+        $login = App::call()->request->getParams()['login'];
+        $pass = App::call()->request->getParams()['pass'];
+        $saveUser = App::call()->request->getParams()['save'];
+        if (App::call()->userRepository->auth($login, $pass)) {
             if (isset($saveUser)) {
                 $hash = uniqid(rand(), true);
-                $id = $_SESSION['auth']['id'];
-                $user = (new UserRepository())->getOne($id);
+                $id = App::call()->session->getAuth('id');
+                $user = App::call()->userRepository->getOne($id);
                 $user->hash = $hash;
-                (new UserRepository())->update($user);
+                App::call()->userRepository->update($user);
                 setcookie("hash", $hash, time() + 3600, '/');
             }
             header("Location:" . $_SERVER['HTTP_REFERER']);
@@ -37,7 +33,7 @@ class AuthController extends Controller
     public function actionLogout()
     {
         setcookie('hash', "", time() - 1, '/');
-        session_destroy();
+        App::call()->session->destroy();
         header("Location:" . $_SERVER['HTTP_REFERER']);
         exit();
     }

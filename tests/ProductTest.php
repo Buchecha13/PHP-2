@@ -4,14 +4,14 @@ use PHPUnit\Framework\TestCase;
 
 use app\models\entities\Product;
 
-class ShopTest extends TestCase
+class ProductTest extends TestCase
 {
     /**
      * @dataProvider providerProductConstructor
      */
     public function testProductConstructor($name, $price, $description) {
          $product = new Product($name, $price, $description);
-         $this->assertIsObject($product);
+
          $this->assertEquals($name, $product->name);
          $this->assertEquals($price, $product->price);
          $this->assertEquals($description, $product->description);
@@ -23,10 +23,19 @@ class ShopTest extends TestCase
         ];
     }
 
-    public function testProductGetTable() {
-        $product = new \app\models\repositories\ProductRepository();
-        $productTableName = $product->getTableName();
+    public function testProductObject() {
+        $product = new Product();
 
-        $this->assertEquals($productTableName, 'products');
+        $this->assertIsObject($product);
     }
+
+    public function testProductAttributes() {
+
+        $this->assertClassHasAttribute('id', Product::class);
+        $this->assertClassHasAttribute('name', Product::class);
+        $this->assertClassHasAttribute('price', Product::class);
+        $this->assertClassHasAttribute('description', Product::class);
+        $this->assertClassHasAttribute('properties', Product::class);
+    }
+
 }

@@ -1,19 +1,27 @@
 {% extends "layouts/main.twig" %}
 
 {% block content %}
-    <table class="orders" border="1">
-        <tr>
-            <td><b>Номер заказа</b></td>
-            <td><b>Имя клиента</b></td>
-            <td><b>Телефон клиента</b></td>
-        </tr>
-        {% for order in orders %}
+    <h1>Заказы пользователей</h1>
+    <div >
+        <table class="orders" border="1">
+            <tr>
+                <td>Номер заказа</td>
+                <td>Дата заказа</td>
+                <td>Имя заказчика</td>
+                <td>Телефон</td>
+                <td>Статус</td>
+                <td>-</td>
+            </tr>
+            {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
+                <td>{{ order.order_date }}</td>
                 <td>{{ order.clientName }}</td>
                 <td>{{ order.clientPhone }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+                <td>{{ order.status }}</td>
+                <td><a href="orders/order/?id={{ order.id }}">Детали заказа</a></td>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
 
