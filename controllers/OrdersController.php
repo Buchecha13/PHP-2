@@ -20,7 +20,7 @@ class OrdersController extends Controller
                     $statuses ['status'] = 'Новый';
                     break;
                 case 'processed':
-                    $statuses ['status'] = 'Обработан';
+                    $statuses ['status'] = 'В обработке';
                     break;
                 case 'done':
                     $statuses ['status'] = 'Выполнен';
