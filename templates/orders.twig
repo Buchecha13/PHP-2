@@ -3,14 +3,14 @@
 {% block content %}
     <h1>Заказы пользователей</h1>
     <div >
-        <table class="orders" border="1">
+        <table class="orders table">
             <tr>
-                <td>Номер заказа</td>
-                <td>Дата заказа</td>
-                <td>Имя заказчика</td>
-                <td>Телефон</td>
-                <td>Статус</td>
-                <td>-</td>
+                <th>Номер заказа</th>
+                <th>Дата заказа</th>
+                <th>Имя заказчика</th>
+                <th>Телефон</th>
+                <th>Статус</th>
+                <th>-</th>
             </tr>
             {% for order in orders %}
             <tr>

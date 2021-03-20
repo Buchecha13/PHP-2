@@ -11,14 +11,15 @@
             {% for product in cart %}
                 <div class="product-item" id="{{ product.cart_id }}">
                     <h3>{{ product.product_name }}</h3>
-                    <img height="100px" src="/product_images/{{ product.product_img }}"
+                    <img width="200px" height="170px" src="/product_images/{{ product.product_img }}"
                          alt="{{ product.product_name }}">
                     <p>Цена: <span>{{ product.product_price }}</span></p>
-                    <button data-id="{{ product.cart_id }}" class="remove-btn">Убрать из корзины</button>
+                    <button data-id="{{ product.cart_id }}" class="remove-btn btn btn-danger">Убрать из корзины</button>
                 </div>
             {% endfor %}
         </div>
-        <forms id="order-form">
+        <h3 class="order-heading">Оформите заказ</h3>
+        <forms id="order-form" class="order-form">
             <input id="order-name" type="text" name="name" placeholder="Ваше Имя">
             <input id="order-phone" type="tel" name="phone" placeholder="Ваш телефон">
             <button id="create-order" class="order-btn">Оформить заказ</button>

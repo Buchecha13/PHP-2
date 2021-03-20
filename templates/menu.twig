@@ -1,12 +1,12 @@
 {% block menu %}
 
-        <ul class="menu">
-            <li><a href="/">Главная</a></li>
-            <li><a href="/catalog">Каталог</a></li>
-            <li><a href="/cart">Корзина [<span id="cartCount">{{ cartCount }}</span>] </a></li>
+        <ul class="menu nav">
+            <li class="nav-item"><a class="nav-link active" href="/">Главная</a></li>
+            <li class="nav-item"><a class="nav-link " href="/catalog">Каталог</a></li>
+            <li class="nav-item"><a class="nav-link " href="/cart">Корзина [<span id="cartCount">{{ cartCount }}</span>] </a></li>
 
             {% if isAuth %}
-                <li><a href="/orders">Заказы (Админка)</a></li>
+                <li class="nav-item"><a class="nav-link " href="/orders">Заказы (Админка)</a></li>
             {% endif %}
         </ul>
 
